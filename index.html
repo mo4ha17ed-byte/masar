@@ -1028,6 +1028,189 @@
         }
     });
 
+
+    // Comprehensive Facility Data
+    const facilityData = {
+        restaurants: [
+            { name: "مطعم الواحة", nameEn: "Al Waha Restaurant", location: "الطابق الثاني - منطقة المغادرة", floor: "2nd Floor - Departure Area", distance: "200م", time: "3 دقائق", waitTime: "10-15 دقيقة", type: "مطعم عربي" },
+            { name: "ستاربكس", nameEn: "Starbucks", location: "الطابق الثاني - قرب البوابة A", floor: "2nd Floor - Near Gate A", distance: "150م", time: "2 دقيقة", waitTime: "5-10 دقائق", type: "مقهى" },
+            { name: "برجر كينج", nameEn: "Burger King", location: "الطابق الثاني - منطقة الانتظار", floor: "2nd Floor - Waiting Area", distance: "180م", time: "3 دقائق", waitTime: "8-12 دقيقة", type: "وجبات سريعة" },
+            { name: "مطعم النخيل", nameEn: "Al Nakheel Restaurant", location: "الطابق الثالث - الصالة الرئيسية", floor: "3rd Floor - Main Lounge", distance: "250م", time: "4 دقائق", waitTime: "15-20 دقيقة", type: "مطعم فاخر" },
+            { name: "كوستا كوفي", nameEn: "Costa Coffee", location: "الطابق الثاني - قرب البوابة B", floor: "2nd Floor - Near Gate B", distance: "220م", time: "3 دقائق", waitTime: "5-8 دقائق", type: "مقهى" }
+        ],
+        prayer: [
+            { name: "مصلى الرجال - الطابق الثاني", nameEn: "Men's Prayer Room - 2nd Floor", location: "الطابق الثاني - بجانب البوابة A5", floor: "2nd Floor - Next to Gate A5", distance: "120م", time: "2 دقيقة", waitTime: "متاح دائماً", type: "مصلى" },
+            { name: "مصلى النساء - الطابق الثاني", nameEn: "Women's Prayer Room - 2nd Floor", location: "الطابق الثاني - بجانب البوابة A5", floor: "2nd Floor - Next to Gate A5", distance: "120م", time: "2 دقيقة", waitTime: "متاح دائماً", type: "مصلى" },
+            { name: "مصلى الطابق الثالث", nameEn: "Prayer Room - 3rd Floor", location: "الطابق الثالث - الصالة الرئيسية", floor: "3rd Floor - Main Lounge", distance: "280م", time: "4 دقائق", waitTime: "متاح دائماً", type: "مصلى" }
+        ],
+        atm: [
+            { name: "بنك الراجحي - ATM", nameEn: "Al Rajhi Bank - ATM", location: "الطابق الثاني - مدخل المغادرة", floor: "2nd Floor - Departure Entrance", distance: "80م", time: "1 دقيقة", waitTime: "2-5 دقائق", type: "صراف آلي" },
+            { name: "البنك الأهلي - ATM", nameEn: "Al Ahli Bank - ATM", location: "الطابق الثاني - قرب البوابة B", floor: "2nd Floor - Near Gate B", distance: "200م", time: "3 دقائق", waitTime: "2-5 دقائق", type: "صراف آلي" },
+            { name: "بنك الرياض - ATM", nameEn: "Riyad Bank - ATM", location: "الطابق الأول - صالة الوصول", floor: "1st Floor - Arrival Hall", distance: "150م", time: "2 دقيقة", waitTime: "2-5 دقائق", type: "صراف آلي" }
+        ],
+        shops: [
+            { name: "متجر السفر الحر", nameEn: "Duty Free Shop", location: "الطابق الثاني - منطقة المغادرة الدولية", floor: "2nd Floor - International Departure", distance: "180م", time: "3 دقائق", waitTime: "10-15 دقيقة", type: "متجر معفى من الرسوم" },
+            { name: "متجر الهدايا التذكارية", nameEn: "Souvenir Shop", location: "الطابق الثاني - قرب البوابة A", floor: "2nd Floor - Near Gate A", distance: "160م", time: "2 دقيقة", waitTime: "5-10 دقائق", type: "هدايا" },
+            { name: "صيدلية النهدي", nameEn: "Nahdi Pharmacy", location: "الطابق الثاني - الممر الرئيسي", floor: "2nd Floor - Main Corridor", distance: "140م", time: "2 دقيقة", waitTime: "5-8 دقائق", type: "صيدلية" },
+            { name: "متجر الإلكترونيات", nameEn: "Electronics Store", location: "الطابق الثاني - منطقة التسوق", floor: "2nd Floor - Shopping Area", distance: "220م", time: "3 دقائق", waitTime: "8-12 دقيقة", type: "إلكترونيات" }
+        ],
+        restrooms: [
+            { name: "دورات المياه - قرب البوابة A", nameEn: "Restrooms - Near Gate A", location: "الطابق الثاني - قرب البوابة A3", floor: "2nd Floor - Near Gate A3", distance: "100م", time: "1 دقيقة", waitTime: "2-5 دقائق", type: "دورات مياه" },
+            { name: "دورات المياه - قرب البوابة B", nameEn: "Restrooms - Near Gate B", location: "الطابق الثاني - قرب البوابة B5", floor: "2nd Floor - Near Gate B5", distance: "180م", time: "3 دقائق", waitTime: "2-5 دقائق", type: "دورات مياه" },
+            { name: "دورات المياه - الصالة الرئيسية", nameEn: "Restrooms - Main Lounge", location: "الطابق الثالث - الصالة الرئيسية", floor: "3rd Floor - Main Lounge", distance: "250م", time: "4 دقائق", waitTime: "2-5 دقائق", type: "دورات مياه" }
+        ],
+        playground: [
+            { name: "منطقة لعب الأطفال - المنطقة الشرقية", nameEn: "Kids Play Area - East Zone", location: "الطابق الثاني - المنطقة الشرقية", floor: "2nd Floor - East Zone", distance: "200م", time: "3 دقائق", waitTime: "متاح الآن", type: "منطقة لعب" },
+            { name: "منطقة لعب الأطفال - المنطقة الغربية", nameEn: "Kids Play Area - West Zone", location: "الطابق الثاني - المنطقة الغربية", floor: "2nd Floor - West Zone", distance: "240م", time: "4 دقائق", waitTime: "متاح الآن", type: "منطقة لعب" }
+        ],
+        info: [
+            { name: "مكتب المعلومات الرئيسي", nameEn: "Main Information Desk", location: "الطابق الثاني - المدخل الرئيسي", floor: "2nd Floor - Main Entrance", distance: "50م", time: "1 دقيقة", waitTime: "2-5 دقائق", type: "مكتب معلومات" },
+            { name: "مكتب المعلومات - البوابات", nameEn: "Information Desk - Gates", location: "الطابق الثاني - منطقة البوابات", floor: "2nd Floor - Gates Area", distance: "180م", time: "3 دقائق", waitTime: "2-5 دقائق", type: "مكتب معلومات" }
+        ],
+        clinic: [
+            { name: "العيادة الطبية", nameEn: "Medical Clinic", location: "الطابق الثاني - قرب مكتب المعلومات", floor: "2nd Floor - Near Information Desk", distance: "120م", time: "2 دقيقة", waitTime: "5-10 دقائق", type: "عيادة طبية" },
+            { name: "الإسعافات الأولية", nameEn: "First Aid", location: "الطابق الأول - صالة الوصول", floor: "1st Floor - Arrival Hall", distance: "200م", time: "3 دقائق", waitTime: "متاح فوراً", type: "إسعافات أولية" }
+        ]
+    };
+
+    // Show facility details modal
+    function showFacilityDetails(facilityType) {
+        const facilities = facilityData[facilityType];
+        if (!facilities || facilities.length === 0) return;
+
+        const currentLang = document.getElementById('language')?.value || 'ar';
+        const isArabic = currentLang === 'ar';
+
+        // Create modal
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        `;
+
+        const modalContent = document.createElement('div');
+        modalContent.style.cssText = `
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        `;
+
+        // Get facility title
+        const titles = {
+            restaurants: { ar: '🍽️ المطاعم والمقاهي', en: '🍽️ Restaurants & Cafes' },
+            prayer: { ar: '🕌 المصليات', en: '🕌 Prayer Rooms' },
+            atm: { ar: '🏧 الصرافات الآلية', en: '🏧 ATMs' },
+            shops: { ar: '🛍️ المتاجر', en: '🛍️ Shops' },
+            restrooms: { ar: '🚻 دورات المياه', en: '🚻 Restrooms' },
+            playground: { ar: '🎮 مناطق لعب الأطفال', en: '🎮 Kids Play Areas' },
+            info: { ar: 'ℹ️ مكاتب المعلومات', en: 'ℹ️ Information Desks' },
+            clinic: { ar: '⚕️ العيادات الطبية', en: '⚕️ Medical Clinics' }
+        };
+
+        const title = titles[facilityType]?.[currentLang] || titles[facilityType]?.ar;
+
+        let html = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: #623285; margin: 0;">${title}</h2>
+                <button onclick="this.closest('[style*=\'position: fixed\']').remove()" 
+                        style="background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 1.1em;">
+                    ${isArabic ? 'إغلاق ✕' : 'Close ✕'}
+                </button>
+            </div>
+            <div style="display: grid; gap: 15px;">
+        `;
+
+        facilities.forEach((facility, index) => {
+            const name = isArabic ? facility.name : facility.nameEn;
+            const location = isArabic ? facility.location : facility.floor;
+            
+            html += `
+                <div style="background: linear-gradient(135deg, #f5f3f0 0%, #e8f1f8 100%); padding: 20px; border-radius: 12px; border-left: 5px solid #d4af37; cursor: pointer; transition: transform 0.3s;"
+                     onmouseover="this.style.transform='translateX(-5px)'"
+                     onmouseout="this.style.transform='translateX(0)'"
+                     onclick="showDetailedInfo('${facilityType}', ${index})">
+                    <h3 style="color: #623285; margin: 0 0 10px 0; font-size: 1.3em;">${name}</h3>
+                    <div style="display: grid; gap: 8px; font-size: 0.95em; color: #2c3e50;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">📍</span>
+                            <span><strong>${isArabic ? 'الموقع:' : 'Location:'}</strong> ${location}</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">🚶</span>
+                            <span><strong>${isArabic ? 'المسافة:' : 'Distance:'}</strong> ${facility.distance} (${facility.time})</span>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.2em;">⏱️</span>
+                            <span><strong>${isArabic ? 'وقت الانتظار:' : 'Wait Time:'}</strong> <span style="color: #27ae60; font-weight: bold;">${facility.waitTime}</span></span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 10px; padding: 8px 12px; background: rgba(98, 50, 133, 0.1); border-radius: 6px; display: inline-block;">
+                        <span style="color: #623285; font-weight: bold; font-size: 0.9em;">${facility.type}</span>
+                    </div>
+                </div>
+            `;
+        });
+
+        html += '</div>';
+        modalContent.innerHTML = html;
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+
+        // Close on outside click
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+    }
+
+    // Show detailed information for a specific facility
+    function showDetailedInfo(facilityType, index) {
+        const facility = facilityData[facilityType][index];
+        const currentLang = document.getElementById('language')?.value || 'ar';
+        const isArabic = currentLang === 'ar';
+        const name = isArabic ? facility.name : facility.nameEn;
+        const location = isArabic ? facility.location : facility.floor;
+
+        alert(`
+${name}
+
+📍 ${isArabic ? 'الموقع:' : 'Location:'} ${location}
+🚶 ${isArabic ? 'المسافة:' : 'Distance:'} ${facility.distance}
+⏱️ ${isArabic ? 'وقت الوصول:' : 'Walking Time:'} ${facility.time}
+⌛ ${isArabic ? 'وقت الانتظار:' : 'Wait Time:'} ${facility.waitTime}
+🏷️ ${isArabic ? 'النوع:' : 'Type:'} ${facility.type}
+        `);
+    }
+
+    // Add click handlers to facility cards
+    document.addEventListener('DOMContentLoaded', function() {
+        const facilityCards = document.querySelectorAll('.facility-card');
+        facilityCards.forEach((card, index) => {
+            const facilityTypes = ['restaurants', 'prayer', 'atm', 'shops', 'restrooms', 'playground', 'info', 'clinic'];
+            if (index < facilityTypes.length) {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function() {
+                    showFacilityDetails(facilityTypes[index]);
+                });
+            }
+        });
+    });
+
     </script>
 </body>
 </html>
