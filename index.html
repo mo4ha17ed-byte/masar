@@ -1007,5 +1007,25 @@
         }
     });
 
+
+    // Handle header language switcher button
+    document.addEventListener('DOMContentLoaded', function() {
+        const langButton = document.querySelector('.lang-switch');
+        const langSelect = document.getElementById('language');
+        
+        if (langButton && langSelect) {
+            langButton.addEventListener('click', function() {
+                // Toggle between Arabic and English
+                const currentLang = langSelect.value;
+                const newLang = currentLang === 'ar' ? 'en' : 'ar';
+                langSelect.value = newLang;
+                changeLanguage(newLang);
+                
+                // Update button text
+                langButton.textContent = newLang === 'ar' ? 'English' : 'العربية';
+            });
+        }
+    });
+
 </body>
 </html>
