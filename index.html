@@ -810,5 +810,202 @@
             // mascotImg.src = 'data:image/png;base64,YOUR_BASE64_HERE';
         });
     </script>
+
+    // Comprehensive Translation System
+    const translations = {
+        ar: {
+            title: "مسار - مساعد السفر الذكي",
+            subtitle: "مساعد السفر الذكي - مطار الملك فهد الدولي",
+            welcome: "مرحباً بك! أنا مسار",
+            welcomeDesc: "مرشدك الرقمي في مطار الملك فهد الدولي",
+            flightInfo: "معلومات رحلتك",
+            ticketLabel: "أدخل رقم التذكرة أو رقم الحجز",
+            ticketPlaceholder: "مثال: SA1234 أو ABC123456",
+            languageLabel: "اختر لغتك المفضلة",
+            showFlightBtn: "عرض معلومات الرحلة ✈️",
+            steps: "خطوات إتمام إجراءات السفر",
+            step1Title: "تسجيل الوصول",
+            step1Desc: "توجه إلى كاونتر تسجيل الوصول في الطابق الثاني (مستوى المغادرة) لتسليم الأمتعة والحصول على بطاقة الصعود.",
+            step2Title: "الأمن والجوازات",
+            step2Desc: "اتجه إلى نقطة التفتيش الأمني ثم إجراءات الجوازات. تأكد من إعداد جواز سفرك وبطاقة الصعود.",
+            step3Title: "منطقة الانتظار",
+            step3Desc: "توجه إلى صالة الانتظار في مستوى الصعود للطائرة. يمكنك الاستفادة من المطاعم والمتاجر المتاحة.",
+            step4Title: "الصعود للطائرة",
+            step4Desc: "عند الإعلان عن بدء الصعود، توجه إلى البوابة المحددة. يبدأ الصعود قبل 45 دقيقة من موعد الإقلاع.",
+            facilities: "خريطة المرافق والخدمات",
+            restaurants: "مطاعم",
+            prayer: "مصلى المطار",
+            atm: "صرافة آلية",
+            shops: "متاجر",
+            restrooms: "دورات المياه",
+            playground: "منطقة لعب الأطفال",
+            info: "مكتب المعلومات",
+            clinic: "عيادة طبية",
+            waitTime: "وقت الانتظار",
+            available: "متاح الآن",
+            minutes: "دقائق",
+            footer: "© 2025 مسار - مساعد السفر الذكي | مطار الملك فهد الدولي"
+        },
+        en: {
+            title: "Masar - Smart Travel Assistant",
+            subtitle: "Smart Travel Assistant - King Fahd International Airport",
+            welcome: "Welcome! I am Masar",
+            welcomeDesc: "Your Digital Guide at King Fahd International Airport",
+            flightInfo: "Your Flight Information",
+            ticketLabel: "Enter Ticket or Booking Number",
+            ticketPlaceholder: "Example: SA1234 or ABC123456",
+            languageLabel: "Choose Your Preferred Language",
+            showFlightBtn: "Show Flight Information ✈️",
+            steps: "Travel Procedure Steps",
+            step1Title: "Check-in",
+            step1Desc: "Go to the check-in counter on the second floor (departure level) to drop off luggage and get your boarding pass.",
+            step2Title: "Security & Passport Control",
+            step2Desc: "Proceed to security checkpoint then passport control. Make sure your passport and boarding pass are ready.",
+            step3Title: "Waiting Area",
+            step3Desc: "Head to the waiting lounge at the boarding level. You can enjoy restaurants and shops available.",
+            step4Title: "Boarding",
+            step4Desc: "When boarding is announced, go to your designated gate. Boarding starts 45 minutes before departure.",
+            facilities: "Facilities & Services Map",
+            restaurants: "Restaurants",
+            prayer: "Prayer Room",
+            atm: "ATM",
+            shops: "Shops",
+            restrooms: "Restrooms",
+            playground: "Kids Play Area",
+            info: "Information Desk",
+            clinic: "Medical Clinic",
+            waitTime: "Wait Time",
+            available: "Available Now",
+            minutes: "minutes",
+            footer: "© 2025 Masar - Smart Travel Assistant | King Fahd International Airport"
+        },
+        ur: {
+            title: "مسار - سمارٹ ٹریول اسسٹنٹ",
+            subtitle: "سمارٹ ٹریول اسسٹنٹ - کنگ فہد انٹرنیشنل ایئرپورٹ",
+            welcome: "خوش آمدید! میں مسار ہوں",
+            welcomeDesc: "کنگ فہد انٹرنیشنل ایئرپورٹ میں آپ کا ڈیجیٹل گائیڈ",
+            flightInfo: "آپ کی پرواز کی معلومات",
+            ticketLabel: "ٹکٹ یا بکنگ نمبر درج کریں",
+            ticketPlaceholder: "مثال: SA1234 یا ABC123456",
+            languageLabel: "اپنی پسندیدہ زبان منتخب کریں",
+            showFlightBtn: "پرواز کی معلومات دکھائیں ✈️",
+            steps: "سفری طریقہ کار کے مراحل",
+            step1Title: "چیک ان",
+            step1Desc: "سامان جمع کرانے اور بورڈنگ پاس حاصل کرنے کے لیے دوسری منزل پر چیک ان کاؤنٹر پر جائیں۔",
+            step2Title: "سیکیورٹی اور پاسپورٹ کنٹرول",
+            step2Desc: "سیکیورٹی چیک پوائنٹ اور پھر پاسپورٹ کنٹرول کی طرف بڑھیں۔ اپنا پاسپورٹ اور بورڈنگ پاس تیار رکھیں۔",
+            step3Title: "انتظار گاہ",
+            step3Desc: "بورڈنگ لیول پر انتظار گاہ کی طرف جائیں۔ آپ دستیاب ریستوراں اور دکانوں سے لطف اندوز ہو سکتے ہیں۔",
+            step4Title: "بورڈنگ",
+            step4Desc: "جب بورڈنگ کا اعلان ہو تو اپنے مقررہ گیٹ پر جائیں۔ بورڈنگ روانگی سے 45 منٹ پہلے شروع ہوتی ہے۔",
+            facilities: "سہولیات اور خدمات کا نقشہ",
+            restaurants: "ریستوراں",
+            prayer: "نماز کا کمرہ",
+            atm: "اے ٹی ایم",
+            shops: "دکانیں",
+            restrooms: "بیت الخلاء",
+            playground: "بچوں کا کھیل کا علاقہ",
+            info: "معلوماتی ڈیسک",
+            clinic: "طبی کلینک",
+            waitTime: "انتظار کا وقت",
+            available: "ابھی دستیاب",
+            minutes: "منٹ",
+            footer: "© 2025 مسار - سمارٹ ٹریول اسسٹنٹ | کنگ فہد انٹرنیشنل ایئرپورٹ"
+        },
+        fr: {
+            title: "Masar - Assistant de Voyage Intelligent",
+            subtitle: "Assistant de Voyage Intelligent - Aéroport International King Fahd",
+            welcome: "Bienvenue! Je suis Masar",
+            welcomeDesc: "Votre Guide Numérique à l'Aéroport International King Fahd",
+            flightInfo: "Informations sur Votre Vol",
+            ticketLabel: "Entrez le Numéro de Billet ou de Réservation",
+            ticketPlaceholder: "Exemple: SA1234 ou ABC123456",
+            languageLabel: "Choisissez Votre Langue Préférée",
+            showFlightBtn: "Afficher les Informations de Vol ✈️",
+            steps: "Étapes de la Procédure de Voyage",
+            step1Title: "Enregistrement",
+            step1Desc: "Rendez-vous au comptoir d'enregistrement au deuxième étage pour déposer vos bagages et obtenir votre carte d'embarquement.",
+            step2Title: "Sécurité et Contrôle des Passeports",
+            step2Desc: "Dirigez-vous vers le point de contrôle de sécurité puis le contrôle des passeports. Assurez-vous que votre passeport et votre carte d'embarquement sont prêts.",
+            step3Title: "Zone d'Attente",
+            step3Desc: "Dirigez-vous vers le salon d'attente au niveau d'embarquement. Vous pouvez profiter des restaurants et boutiques disponibles.",
+            step4Title: "Embarquement",
+            step4Desc: "Lorsque l'embarquement est annoncé, rendez-vous à votre porte désignée. L'embarquement commence 45 minutes avant le départ.",
+            facilities: "Carte des Installations et Services",
+            restaurants: "Restaurants",
+            prayer: "Salle de Prière",
+            atm: "Distributeur Automatique",
+            shops: "Boutiques",
+            restrooms: "Toilettes",
+            playground: "Aire de Jeux pour Enfants",
+            info: "Bureau d'Information",
+            clinic: "Clinique Médicale",
+            waitTime: "Temps d'Attente",
+            available: "Disponible Maintenant",
+            minutes: "minutes",
+            footer: "© 2025 Masar - Assistant de Voyage Intelligent | Aéroport International King Fahd"
+        }
+    };
+
+    function changeLanguage(lang) {
+        const t = translations[lang] || translations.ar;
+        const isRTL = ['ar', 'ur'].includes(lang);
+        
+        // Update document direction
+        document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+        document.documentElement.setAttribute('lang', lang);
+        
+        // Update all translatable elements
+        document.title = t.title;
+        
+        // Update text content by data attributes or IDs
+        const elements = {
+            '.logo-text h1': t.title.split(' - ')[0],
+            '.logo-text p': t.subtitle,
+            '.mascot-bubble h2': t.welcome,
+            '.mascot-bubble p': t.welcomeDesc,
+            '.card:nth-of-type(1) h2': t.flightInfo,
+            '.card:nth-of-type(1) label:nth-of-type(1)': t.ticketLabel,
+            '#ticketNumber': (el) => el.placeholder = t.ticketPlaceholder,
+            '.card:nth-of-type(1) label:nth-of-type(2)': t.languageLabel,
+            '.btn-primary': t.showFlightBtn,
+            '.card:nth-of-type(2) h2': t.steps,
+            '.step:nth-of-type(1) h3': t.step1Title,
+            '.step:nth-of-type(1) p': t.step1Desc,
+            '.step:nth-of-type(2) h3': t.step2Title,
+            '.step:nth-of-type(2) p': t.step2Desc,
+            '.step:nth-of-type(3) h3': t.step3Title,
+            '.step:nth-of-type(3) p': t.step3Desc,
+            '.step:nth-of-type(4) h3': t.step4Title,
+            '.step:nth-of-type(4) p': t.step4Desc,
+            '.card:nth-of-type(3) h2': t.facilities
+        };
+        
+        for (const [selector, value] of Object.entries(elements)) {
+            const el = document.querySelector(selector);
+            if (el) {
+                if (typeof value === 'function') {
+                    value(el);
+                } else {
+                    el.textContent = value;
+                }
+            }
+        }
+        
+        // Update footer
+        const footer = document.querySelector('footer p:first-child');
+        if (footer) footer.textContent = t.footer;
+    }
+
+    // Add event listener to language selector
+    document.addEventListener('DOMContentLoaded', function() {
+        const langSelect = document.getElementById('language');
+        if (langSelect) {
+            langSelect.addEventListener('change', function() {
+                changeLanguage(this.value);
+            });
+        }
+    });
+
 </body>
 </html>
