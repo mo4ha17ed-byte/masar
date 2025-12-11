@@ -1126,7 +1126,7 @@
         let html = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                 <h2 style="color: #623285; margin: 0;">${title}</h2>
-                <button onclick="this.closest('[style*=\'position: fixed\']').remove()" 
+                <button class="modal-close-btn" 
                         style="background: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 1.1em;">
                     ${isArabic ? 'إغلاق ✕' : 'Close ✕'}
                 </button>
@@ -1168,6 +1168,14 @@
         html += '</div>';
         modalContent.innerHTML = html;
         modal.appendChild(modalContent);
+        // Add close button handler
+        const closeBtn = modalContent.querySelector('.modal-close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                modal.remove();
+            });
+        }
+
         document.body.appendChild(modal);
 
         // Close on outside click
