@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسار - مساعد السفر الذكي</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f3f0; color: #2c3e50; }
+        header { background: #623285; color: white; padding: 20px; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .card { background: white; padding: 30px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        button { background: #d4af37; color: #623285; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #f0d98f; }
+        .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
+        .facility-card { background: #f5f3f0; padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .facility-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(98, 50, 133, 0.2); }
+        .facility-card .icon { font-size: 2em; margin-bottom: 10px; }
+        footer { background: #623285; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>مسار - مساعد السفر الذكي</h1>
+        <p>مطار الملك فهد الدولي - دمام</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>معلومات رحلتك</h2>
+            <input type="text" id="ticket" placeholder="أدخل رقم التذكرة" style="width:100%; padding:10px; margin:10px 0;">
+            <button onclick="showFlightInfo()">عرض معلومات الرحلة</button>
+        </div>
+
+        <div class="card">
+            <h2>المرافق والخدمات</h2>
+            <div class="facility-grid">
+                <div class="facility-card" onclick="showFacility('مطاعم')">
+                    <div class="icon">🍽️</div>
+                    <div>مطاعم</div>
+                </div>
+                <div class="facility-card" onclick="showFacility('مصليات')">
+                    <div class="icon">🕌</div>
+                    <div>مصليات</div>
+                </div>
+                <div class="facility-card" onclick="showFacility('متاجر')">
+                    <div class="icon">🛍️</div>
+                    <div>متاجر</div>
+                </div>
+                <div class="facility-card" onclick="showFacility('دورات مياه')">
+                    <div class="icon">🚻</div>
+                    <div>دورات مياه</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 مسار - مساعد السفر الذكي</p>
+    </footer>
+
+    <script>
+        function showFlightInfo() {
+            const ticket = document.getElementById('ticket').value;
+            if(ticket) {
+                alert('معلومات الرحلة:\nرقم التذكرة: ' + ticket + '\nالبوابة: A12\nالوقت: 14:30');
+            }
+        }
+        function showFacility(name) {
+            alert('تم اختيار: ' + name);
+        }
+    </script>
+</body>
+</html>
