@@ -154,6 +154,108 @@
         
         .back-btn { background: #623285 !important; color: white !important; }
         
+        /* Map Styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            background: #e8e8e8;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid #d4af37;
+        }
+        
+        .map-canvas {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+        }
+        
+        .map-location {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #623285;
+            border: 3px solid #d4af37;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        
+        .map-location:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(98, 50, 133, 0.4);
+        }
+        
+        .map-label {
+            position: absolute;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #d4af37;
+        }
+        
+        .map-controls {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+            z-index: 10;
+        }
+        
+        .map-control-btn {
+            background: white !important;
+            color: #623285 !important;
+            width: 40px !important;
+            height: 40px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border-radius: 5px !important;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #d4af37 !important;
+        }
+        
+        .map-control-btn:hover {
+            background: #d4af37 !important;
+        }
+        
+        .map-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .legend-icon {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
         footer { 
             background: #623285; 
             color: white; 
@@ -204,6 +306,7 @@
                     <div>صرافات</div>
                 </button>
             </div>
+            <button onclick="openMap()" style="margin-top: 15px; background: #623285; color: white;">🗺️ خريطة المطار التفاعلية</button>
         </div>
     </div>
 
@@ -214,6 +317,49 @@
                 <button class="close-btn" onclick="closeModal()">إغلاق ✕</button>
             </div>
             <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <div id="mapModal" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>🗺️ خريطة المطار التفاعلية</h2>
+                <button class="close-btn" onclick="closeMapModal()">إغلاق ✕</button>
+            </div>
+            <div class="map-container">
+                <div class="map-canvas" id="mapCanvas"></div>
+                <div class="map-controls">
+                    <button class="map-control-btn" onclick="zoomIn()">+</button>
+                    <button class="map-control-btn" onclick="zoomOut()">−</button>
+                    <button class="map-control-btn" onclick="resetMap()">⟲</button>
+                </div>
+            </div>
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #FF6B6B;">🍽️</div>
+                    <span>مطاعم</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #4ECDC4;">🕌</div>
+                    <span>مصليات</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #45B7D1;">💊</div>
+                    <span>صيدليات</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #FFA07A;">🛍️</div>
+                    <span>متاجر</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #98D8C8;">🚻</div>
+                    <span>دورات مياه</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-icon" style="background: #F7DC6F;">💰</div>
+                    <span>صرافات</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -257,6 +403,33 @@
                 { name: 'صراف الرياض', location: 'الطابق الأول - المنطقة الوسطى', distance: '270م', time: '5 دقائق', wait: 'متاح' }
             ]
         };
+
+        const mapLocations = [
+            // Restaurants
+            { type: 'restaurants', name: 'مطعم الواحة', icon: '🍽️', x: 15, y: 30, color: '#FF6B6B' },
+            { type: 'restaurants', name: 'ستاربكس', icon: '🍽️', x: 75, y: 25, color: '#FF6B6B' },
+            { type: 'restaurants', name: 'برجر كينج', icon: '🍽️', x: 25, y: 70, color: '#FF6B6B' },
+            // Prayer Rooms
+            { type: 'prayer', name: 'مصلى الرجال', icon: '🕌', x: 50, y: 15, color: '#4ECDC4' },
+            { type: 'prayer', name: 'مصلى النساء', icon: '🕌', x: 60, y: 20, color: '#4ECDC4' },
+            { type: 'prayer', name: 'مصلى العائلات', icon: '🕌', x: 40, y: 85, color: '#4ECDC4' },
+            // Pharmacies
+            { type: 'pharmacy', name: 'صيدلية النهدي', icon: '💊', x: 80, y: 40, color: '#45B7D1' },
+            { type: 'pharmacy', name: 'صيدلية الدواء', icon: '💊', x: 20, y: 50, color: '#45B7D1' },
+            // Shops
+            { type: 'shops', name: 'متجر الهدايا', icon: '🛍️', x: 50, y: 50, color: '#FFA07A' },
+            { type: 'shops', name: 'متجر الملابس', icon: '🛍️', x: 85, y: 60, color: '#FFA07A' },
+            // Restrooms
+            { type: 'restrooms', name: 'دورات مياه - الشرقية', icon: '🚻', x: 90, y: 75, color: '#98D8C8' },
+            { type: 'restrooms', name: 'دورات مياه - الغربية', icon: '🚻', x: 10, y: 80, color: '#98D8C8' },
+            // ATMs
+            { type: 'atm', name: 'صراف الراجحي', icon: '💰', x: 70, y: 85, color: '#F7DC6F' },
+            { type: 'atm', name: 'صراف الأهلي', icon: '💰', x: 30, y: 90, color: '#F7DC6F' }
+        ];
+
+        let mapZoom = 1;
+        let mapOffsetX = 0;
+        let mapOffsetY = 0;
 
         function openFacility(type) {
             const modal = document.getElementById('modal');
@@ -310,6 +483,96 @@
             document.getElementById('modal').classList.remove('show');
         }
 
+        function openMap() {
+            document.getElementById('mapModal').classList.add('show');
+            renderMap();
+        }
+
+        function closeMapModal() {
+            document.getElementById('mapModal').classList.remove('show');
+        }
+
+        function renderMap() {
+            const canvas = document.getElementById('mapCanvas');
+            canvas.innerHTML = '';
+            
+            // Draw grid background
+            const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            svg.setAttribute('width', '100%');
+            svg.setAttribute('height', '100%');
+            svg.setAttribute('style', 'position: absolute; top: 0; left: 0;');
+            
+            // Add grid lines
+            for (let i = 0; i <= 100; i += 10) {
+                const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line.setAttribute('x1', i + '%');
+                line.setAttribute('y1', '0%');
+                line.setAttribute('x2', i + '%');
+                line.setAttribute('y2', '100%');
+                line.setAttribute('stroke', '#ddd');
+                line.setAttribute('stroke-width', '1');
+                svg.appendChild(line);
+                
+                const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                line2.setAttribute('x1', '0%');
+                line2.setAttribute('y1', i + '%');
+                line2.setAttribute('x2', '100%');
+                line2.setAttribute('y2', i + '%');
+                line2.setAttribute('stroke', '#ddd');
+                line2.setAttribute('stroke-width', '1');
+                svg.appendChild(line2);
+            }
+            
+            canvas.appendChild(svg);
+            
+            // Add locations
+            mapLocations.forEach(loc => {
+                const locElement = document.createElement('div');
+                locElement.className = 'map-location';
+                locElement.style.left = loc.x + '%';
+                locElement.style.top = loc.y + '%';
+                locElement.style.background = loc.color;
+                locElement.textContent = loc.icon;
+                locElement.onclick = () => showMapDetail(loc);
+                canvas.appendChild(locElement);
+            });
+        }
+
+        function showMapDetail(location) {
+            const body = document.getElementById('modalBody');
+            const facilityData = facilities[location.type].find(f => f.name === location.name);
+            
+            if (facilityData) {
+                body.innerHTML = `
+                    <div class="detail-box">
+                        <h3>${location.icon} ${location.name}</h3>
+                        <div>📍 <strong>الموقع:</strong> ${facilityData.location}</div>
+                        <div>📏 <strong>المسافة:</strong> ${facilityData.distance}</div>
+                        <div>⏱️ <strong>وقت الوصول:</strong> ${facilityData.time}</div>
+                        <div>⌛ <strong>وقت الانتظار:</strong> ${facilityData.wait}</div>
+                        <button class="back-btn" onclick="renderMap()">العودة للخريطة</button>
+                    </div>
+                `;
+            }
+        }
+
+        function zoomIn() {
+            mapZoom = Math.min(mapZoom + 0.2, 2);
+            renderMap();
+        }
+
+        function zoomOut() {
+            mapZoom = Math.max(mapZoom - 0.2, 0.5);
+            renderMap();
+        }
+
+        function resetMap() {
+            mapZoom = 1;
+            mapOffsetX = 0;
+            mapOffsetY = 0;
+            renderMap();
+        }
+
         function showFlightInfo() {
             const ticket = document.getElementById('ticket').value;
             if(ticket) {
@@ -321,7 +584,9 @@
 
         document.addEventListener('click', function(e) {
             const modal = document.getElementById('modal');
+            const mapModal = document.getElementById('mapModal');
             if(e.target === modal) closeModal();
+            if(e.target === mapModal) closeMapModal();
         });
     </script>
 </body>
