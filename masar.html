@@ -6,69 +6,367 @@
     <title>مسار - مساعد السفر الذكي</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #f5f3f0; color: #2c3e50; }
-        header { background: #623285; color: white; padding: 20px; text-align: center; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f5f3f0; color: #2c3e50; }
+        
+        header { 
+            background: linear-gradient(135deg, #623285 0%, #7B4397 100%);
+            color: white; 
+            padding: 20px; 
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        header h1 { font-size: 2.5em; margin-bottom: 5px; color: #d4af37; }
+        header p { font-size: 1.1em; opacity: 0.95; }
+        
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .card { background: white; padding: 30px; margin: 20px 0; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        button { background: #d4af37; color: #623285; padding: 12px 30px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        button:hover { background: #f0d98f; }
-        .facility-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; margin: 20px 0; }
-        .facility-card { background: #f5f3f0; padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .facility-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(98, 50, 133, 0.2); }
-        .facility-card .icon { font-size: 2em; margin-bottom: 10px; }
-        footer { background: #623285; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        
+        .card { 
+            background: white; 
+            padding: 30px; 
+            margin: 20px 0; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid #d4af37;
+        }
+        
+        .card h2 { color: #623285; margin-bottom: 20px; font-size: 1.8em; }
+        
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #d4af37;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        button { 
+            background: linear-gradient(135deg, #d4af37 0%, #f0d98f 100%);
+            color: #623285; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .facility-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 15px; 
+            margin: 20px 0; 
+        }
+        
+        .facility-card { 
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8f1f8 100%);
+            padding: 20px; 
+            border-radius: 10px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .facility-card:hover { 
+            transform: translateY(-8px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 25px rgba(98, 50, 133, 0.2);
+        }
+        
+        .facility-card .icon { font-size: 2.5em; margin-bottom: 10px; }
+        .facility-card .name { font-weight: bold; color: #623285; }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active { display: flex; }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 15px;
+        }
+        
+        .modal-header h2 { color: #623285; margin: 0; }
+        
+        .close-btn {
+            background: #e74c3c !important;
+            color: white !important;
+            padding: 8px 15px !important;
+            width: auto !important;
+            margin: 0 !important;
+            border-radius: 5px !important;
+        }
+        
+        .facility-item {
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8f1f8 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #d4af37;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .facility-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 15px rgba(98, 50, 133, 0.2);
+        }
+        
+        .facility-item h3 { color: #623285; margin-bottom: 10px; font-size: 1.3em; }
+        
+        .facility-info {
+            display: grid;
+            gap: 8px;
+            font-size: 0.95em;
+            color: #2c3e50;
+        }
+        
+        .facility-info div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .detail-view {
+            background: linear-gradient(135deg, #f5f3f0 0%, #e8f1f8 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #d4af37;
+        }
+        
+        .detail-view h3 { color: #623285; margin-bottom: 15px; font-size: 1.5em; }
+        
+        .detail-info {
+            display: grid;
+            gap: 12px;
+            font-size: 1.05em;
+        }
+        
+        .detail-info div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .back-btn {
+            background: #623285 !important;
+            color: white !important;
+            margin-top: 20px !important;
+        }
+        
+        footer { 
+            background: #623285; 
+            color: white; 
+            text-align: center; 
+            padding: 20px; 
+            margin-top: 40px; 
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>مسار - مساعد السفر الذكي</h1>
-        <p>مطار الملك فهد الدولي - دمام</p>
+        <h1>مسار</h1>
+        <p>مساعد السفر الذكي - مطار الملك فهد الدولي</p>
     </header>
 
     <div class="container">
         <div class="card">
-            <h2>معلومات رحلتك</h2>
-            <input type="text" id="ticket" placeholder="أدخل رقم التذكرة" style="width:100%; padding:10px; margin:10px 0;">
+            <h2>معلومات رحلتك ✈️</h2>
+            <input type="text" id="ticket" placeholder="أدخل رقم التذكرة (مثال: SA1234)">
             <button onclick="showFlightInfo()">عرض معلومات الرحلة</button>
         </div>
 
         <div class="card">
-            <h2>المرافق والخدمات</h2>
+            <h2>المرافق والخدمات 🗺️</h2>
             <div class="facility-grid">
-                <div class="facility-card" onclick="showFacility('مطاعم')">
+                <div class="facility-card" onclick="showFacilityList('restaurants')">
                     <div class="icon">🍽️</div>
-                    <div>مطاعم</div>
+                    <div class="name">مطاعم</div>
                 </div>
-                <div class="facility-card" onclick="showFacility('مصليات')">
+                <div class="facility-card" onclick="showFacilityList('prayer')">
                     <div class="icon">🕌</div>
-                    <div>مصليات</div>
+                    <div class="name">مصليات</div>
                 </div>
-                <div class="facility-card" onclick="showFacility('متاجر')">
+                <div class="facility-card" onclick="showFacilityList('pharmacy')">
+                    <div class="icon">💊</div>
+                    <div class="name">صيدلية</div>
+                </div>
+                <div class="facility-card" onclick="showFacilityList('shops')">
                     <div class="icon">🛍️</div>
-                    <div>متاجر</div>
+                    <div class="name">متاجر</div>
                 </div>
-                <div class="facility-card" onclick="showFacility('دورات مياه')">
+                <div class="facility-card" onclick="showFacilityList('restrooms')">
                     <div class="icon">🚻</div>
-                    <div>دورات مياه</div>
+                    <div class="name">دورات مياه</div>
+                </div>
+                <div class="facility-card" onclick="showFacilityList('atm')">
+                    <div class="icon">💰</div>
+                    <div class="name">صرافات</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div id="facilityModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">المرافق</h2>
+                <button class="close-btn" onclick="closeFacilityModal()">إغلاق ✕</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
     <footer>
-        <p>© 2025 مسار - مساعد السفر الذكي</p>
+        <p>© 2025 مسار - مساعد السفر الذكي | مطار الملك فهد الدولي</p>
     </footer>
 
     <script>
+        const facilities = {
+            restaurants: [
+                { name: 'مطعم الواحة', location: 'الطابق الثاني - المنطقة الوسطى', distance: '150م', time: '3 دقائق', wait: '10 دقائق' },
+                { name: 'ستاربكس', location: 'الطابق الثاني - الجهة الشرقية', distance: '200م', time: '4 دقائق', wait: '5 دقائق' },
+                { name: 'برجر كينج', location: 'الطابق الثاني - الجهة الغربية', distance: '180م', time: '3 دقائق', wait: '8 دقائق' },
+                { name: 'مطعم النخيل', location: 'الطابق الأول - المنطقة الوسطى', distance: '250م', time: '5 دقائق', wait: '15 دقائق' },
+                { name: 'كوستا كوفي', location: 'الطابق الثاني - الجهة الشرقية', distance: '220م', time: '4 دقائق', wait: '6 دقائق' }
+            ],
+            prayer: [
+                { name: 'مصلى الرجال', location: 'الطابق الثاني - الجهة الشمالية', distance: '120م', time: '2 دقيقة', wait: 'متاح' },
+                { name: 'مصلى النساء', location: 'الطابق الثاني - الجهة الشمالية', distance: '130م', time: '2 دقيقة', wait: 'متاح' },
+                { name: 'مصلى العائلات', location: 'الطابق الأول - المنطقة الوسطى', distance: '280م', time: '5 دقائق', wait: 'متاح' }
+            ],
+            pharmacy: [
+                { name: 'صيدلية النهدي', location: 'الطابق الثاني - الجهة الشرقية', distance: '190م', time: '3 دقائق', wait: '5 دقائق' },
+                { name: 'صيدلية الدواء', location: 'الطابق الثاني - الجهة الغربية', distance: '210م', time: '4 دقائق', wait: '7 دقائق' },
+                { name: 'عيادة طبية', location: 'الطابق الأول - المنطقة الوسطى', distance: '300م', time: '6 دقائق', wait: '10 دقائق' }
+            ],
+            shops: [
+                { name: 'متجر السفر الحر', location: 'الطابق الثاني - الجهة الشرقية', distance: '170م', time: '3 دقائق', wait: '5 دقائق' },
+                { name: 'متجر الهدايا', location: 'الطابق الثاني - الجهة الوسطى', distance: '160م', time: '3 دقائق', wait: '4 دقائق' },
+                { name: 'متجر الإلكترونيات', location: 'الطابق الثاني - الجهة الغربية', distance: '200م', time: '4 دقائق', wait: '6 دقائق' },
+                { name: 'متجر الملابس', location: 'الطابق الثاني - الجهة الشرقية', distance: '180م', time: '3 دقائق', wait: '5 دقائق' }
+            ],
+            restrooms: [
+                { name: 'دورات مياه - الطابق الثاني الشرقية', location: 'الطابق الثاني - الجهة الشرقية', distance: '100م', time: '2 دقيقة', wait: '3 دقائق' },
+                { name: 'دورات مياه - الطابق الثاني الغربية', location: 'الطابق الثاني - الجهة الغربية', distance: '110م', time: '2 دقيقة', wait: '2 دقيقة' },
+                { name: 'دورات مياه - الطابق الأول', location: 'الطابق الأول - المنطقة الوسطى', distance: '250م', time: '5 دقائق', wait: '4 دقائق' }
+            ],
+            atm: [
+                { name: 'صراف الراجحي', location: 'الطابق الثاني - الجهة الشرقية', distance: '140م', time: '2 دقيقة', wait: 'متاح' },
+                { name: 'صراف الأهلي', location: 'الطابق الثاني - الجهة الغربية', distance: '160م', time: '3 دقائق', wait: 'متاح' },
+                { name: 'صراف الرياض', location: 'الطابق الأول - المنطقة الوسطى', distance: '270م', time: '5 دقائق', wait: 'متاح' }
+            ]
+        };
+
+        function showFacilityList(type) {
+            const modal = document.getElementById('facilityModal');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+            
+            const titles = {
+                restaurants: '🍽️ المطاعم والمقاهي',
+                prayer: '🕌 المصليات',
+                pharmacy: '💊 الصيدليات والعيادات',
+                shops: '🛍️ المتاجر',
+                restrooms: '🚻 دورات المياه',
+                atm: '💰 الصرافات الآلية'
+            };
+            
+            title.textContent = titles[type];
+            body.innerHTML = '';
+            
+            facilities[type].forEach((facility, index) => {
+                const item = document.createElement('div');
+                item.className = 'facility-item';
+                item.onclick = () => showFacilityDetail(facility);
+                item.innerHTML = `
+                    <h3>${facility.name}</h3>
+                    <div class="facility-info">
+                        <div>📍 ${facility.location}</div>
+                        <div>📏 المسافة: ${facility.distance}</div>
+                        <div>⏱️ وقت الوصول: ${facility.time}</div>
+                        <div>⌛ وقت الانتظار: ${facility.wait}</div>
+                    </div>
+                `;
+                body.appendChild(item);
+            });
+            
+            modal.classList.add('active');
+        }
+
+        function showFacilityDetail(facility) {
+            const body = document.getElementById('modalBody');
+            body.innerHTML = `
+                <div class="detail-view">
+                    <h3>${facility.name}</h3>
+                    <div class="detail-info">
+                        <div>📍 <strong>الموقع:</strong> ${facility.location}</div>
+                        <div>📏 <strong>المسافة:</strong> ${facility.distance}</div>
+                        <div>⏱️ <strong>وقت الوصول:</strong> ${facility.time}</div>
+                        <div>⌛ <strong>وقت الانتظار:</strong> ${facility.wait}</div>
+                    </div>
+                    <button class="back-btn" onclick="location.reload()">العودة للقائمة</button>
+                </div>
+            `;
+        }
+
+        function closeFacilityModal() {
+            document.getElementById('facilityModal').classList.remove('active');
+        }
+
         function showFlightInfo() {
             const ticket = document.getElementById('ticket').value;
             if(ticket) {
-                alert('معلومات الرحلة:\nرقم التذكرة: ' + ticket + '\nالبوابة: A12\nالوقت: 14:30');
+                alert('معلومات الرحلة:\n\nرقم التذكرة: ' + ticket + '\nرقم الرحلة: SV1234\nالوجهة: جدة (JED)\nوقت الإقلاع: 14:30\nالبوابة: A12\nالوقت المتبقي: 2 ساعة و 15 دقيقة');
+            } else {
+                alert('من فضلك أدخل رقم التذكرة');
             }
         }
-        function showFacility(name) {
-            alert('تم اختيار: ' + name);
-        }
+
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('facilityModal');
+            if(event.target === modal) {
+                closeFacilityModal();
+            }
+        });
     </script>
 </body>
 </html>
